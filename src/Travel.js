@@ -14,14 +14,6 @@ export default class Travel extends React.Component {
     this.loadDestinations();
   }
 
-  //   showVisited = async () => {
-  //     const res = await axios.get(BaseURL);
-  //     const destinations = res.data;
-  //     const visited = destinations.filter((des) => des.isCompleted === 1);
-
-  //     this.setState({ destinations: visited });
-  //   };
-
   onInputChange = (event) => {
     this.setState({ text: event.target.value });
     // console.log(this.state.text);
@@ -38,13 +30,12 @@ export default class Travel extends React.Component {
     }
   };
   onCheckboxChange = async (id, event) => {
-    // to change the value of checked we need to know the id.value and the state of the checkbox
-    // event.preventDefault(); // to prevent the page to reload
-    const isCompleted = event.target.checked; // this is where the value of property checked is !!
+ 
+    const isCompleted = event.target.checked; 
     await axios.put("http://localhost:8080/todos/" + id, {
       isCompleted: isCompleted,
     });
-    // now that the state of the checkbox is changed we need to call loadDestinations() again
+
     await this.loadDestinations();
   };
   handleDelete = async (id, event) => {
@@ -53,9 +44,9 @@ export default class Travel extends React.Component {
     await this.loadDestinations();
   };
   loadDestinations = async () => {
-    const res = await axios.get(BaseURL); // get the res from server
-    const destinations = res.data; //set destinations equal with the data we got
-    this.setState({ destinations: destinations }); // change the state of destinations so we can display them in the browser
+    const res = await axios.get(BaseURL); 
+    const destinations = res.data; 
+    this.setState({ destinations: destinations }); 
   };
 
   render() {
